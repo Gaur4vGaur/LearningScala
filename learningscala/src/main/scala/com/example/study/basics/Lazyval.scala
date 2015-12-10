@@ -1,5 +1,12 @@
 package com.example.study.basics
 
+/**
+ * Program help us understand when is lazy val and a regualar val 
+ * get initialized.
+ *
+ * @author Gaurav Gaur
+ *
+ **/
 object Lazyval {
 
 	lazy val lazyVal1 = {println("lazy val 1 initialized"); 1}
