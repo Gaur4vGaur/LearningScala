@@ -1,14 +1,14 @@
 package com.example.study.methods
 
 /**
- * The class displays the difference between passing and argument 
+ * The class displays the difference between passing an argument 
  * and passing a function. Note the difference when exactly the value
  * of argument is getting calculated
  *
- * Another thing to note in this program is how the calls for Another 
- * object are getting executed.
- * Execute the program and observe the calls in Another object and after 
- * that uncomment Another object and observe the calls for Another object
+ * Another thing to note in this program is how the calls for "Another 
+ * object" are getting executed.
+ * Execute the program and observe the calls for "Another object". 
+ * Uncomment "Another object" on line 37 and observe the calls for "Another object"
  *
  * @author Gaurav Gaur
  *
