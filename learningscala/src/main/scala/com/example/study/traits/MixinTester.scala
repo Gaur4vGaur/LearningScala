@@ -17,30 +17,20 @@ object MixinTester {
 }
 
 class Animal() {
-
-	def methodToOverride(s: String = "") = { 
-		println(s"Final Animal value is $s")
-	}
+	def methodToOverride(s: String = "") = println(s"Final Animal value is $s")
 }
 
 trait Furry extends Animal {
-	abstract override def methodToOverride(s: String = "") = {
-		super.methodToOverride(s + " Furry")
-	}
+	abstract override def methodToOverride(s: String = "") = super.methodToOverride(s + " Furry")
 }
 
 trait HasLegs extends Animal {
-	abstract override def methodToOverride(s: String = "") = {
-		super.methodToOverride(s + " HasLegs")
-	}
+	abstract override def methodToOverride(s: String = "") = super.methodToOverride(s + " HasLegs")
 }
 
 trait FourLegged extends Animal {
-	abstract override def methodToOverride(s: String = "") = {
-		super.methodToOverride(s + " FourLegged")
-	}
+	abstract override def methodToOverride(s: String = "") = super.methodToOverride(s + " FourLegged")
 }
 
 class Cat extends Animal 
-
 class Cat1 extends Animal
