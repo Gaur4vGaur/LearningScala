@@ -1,32 +1,56 @@
 package codekata.ddcn
 
-import IconNumbers._ 
+import IconNumbers._
+import IconRoman._
 
 object RomanNumeralKata {
 
-	def arabicToRoman(arabic: Int, roman: String = ""): String = {
-		arabic match {
-			case lessThanFive if 5 % lessThanFive >= 3 => one * lessThanFive
-			case lessThanFive if 5 % lessThanFive <= 1 => one * lessThanFive + five
-			case fiveToTen if fiveToTen < 9 => five + one * (fiveToTen % 5)
-			case 9 => one + ten
-			case 10 => ten
-		}
-	}
+  def arabicToRoman(input: Int): String = {
 
-	def romanToArabic(roman: String) = {
-		println("converting Roman to Arabic")
-		0
-	}
+    def calculate(arabic: Int, result: String = "", shouldAppend: Boolean = true): String = {
+      arabic match {
+        case lessThanFour if lessThanFour < 4 =>
+          if (shouldAppend) result + (oneR * lessThanFour)
+          else (oneR * lessThanFour) + result
+        case lessThanNine if lessThanNine < 9 =>
+          if (lessThanNine < five) result + calculate((five - lessThanNine), fiveR, false)
+          else calculate((lessThanNine % five), fiveR + result, true)
+        case lessThanThirtyNine if lessThanThirtyNine < 40 =>
+          if (lessThanThirtyNine < ten) result + calculate((ten - lessThanThirtyNine), tenR, false)
+          else calculate((lessThanThirtyNine % ten), (tenR * (lessThanThirtyNine / ten)) + result, true)
+        case lessThanNinety if lessThanNinety < 90 =>
+          if (lessThanNinety < fifty) result + calculate((fifty - lessThanNinety), fiftyR, false)
+          else calculate((lessThanNinety % fifty), (fiftyR * (lessThanNinety / fifty)) + result , true)
+        case _ => "roman"
+      }
+    }
+
+    val result = calculate(input)
+    println("\n" + input + "  " + result)
+    result
+  }
+
+  def romanToArabic(roman: String) = {
+    println("converting Roman to Arabic")
+    0
+  }
 
 }
 
-object IconNumbers {
+object IconRoman {
+  val oneR = "I"
+  val fiveR = "V"
+  val tenR = "X"
+  val fiftyR = "L"
+  val hundredR = "C"
+  val fiveHundredR = "D"
+}
 
-	val one = "I"
-	val five = "V"
-	val ten = "X"
-	val fifty = "L"
-	val hundred = "C"
-	val fiveHundred = "D"
+object IconNumbers {
+  val one = 1
+  val five = 5
+  val ten = 10
+  val fifty = 50
+  val hundred = 100
+  val fiveHundred = 500
 }

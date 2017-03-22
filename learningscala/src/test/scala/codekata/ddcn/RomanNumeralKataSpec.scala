@@ -6,10 +6,16 @@ import org.scalatest.{FlatSpec, Matchers}
 class RomanNumeralKataSpec extends FlatSpec with Matchers {
 
 	"ArabicToRoman" should "convert first 3 numbers respectively" in {
+		arabicToRoman(40) should be("XL")
 		arabicToRoman(1) should be("I")
 		arabicToRoman(2) should be("II")
 		arabicToRoman(3) should be("III")
 	}
+
+	it should "random test" in {
+    arabicToRoman(14) should be("XIV")
+		arabicToRoman(39) should be("XXXIX")
+  }
 
 	it should "convert icon numberts to roman respectively" in {
 		arabicToRoman(1) should be("I")
