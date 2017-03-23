@@ -5,33 +5,50 @@ import IconRoman._
 
 object RomanNumeralKata {
 
-  def arabicToRoman(input: Int): String = {
+  def arabicToRoman(arabic: Int): String = {
 
-    def calculate(arabic: Int, result: String = "", shouldAppend: Boolean = true): String = {
+    val calculations2 = (convertToRoman: (Int, String, Boolean) => String, roman: String, lastIcon: Int) =>
+      roman + convertToRoman((arabic % lastIcon), "", false)
+
+    def calculations(input: Int, iconNumber: Int, romanSymbol: String, lastRoman: String) = {
+      if (input < iconNumber) lastRoman
+      else convertToRoman((input % iconNumber), romanSymbol, true)
+    }
+
+    def convertToRoman(arabic: Int, result: String = "", shouldAppend: Boolean = true): String = {
       arabic match {
         case lessThanFour if lessThanFour < 4 =>
           if (shouldAppend) result + (oneR * lessThanFour)
           else (oneR * lessThanFour) + result
+
         case lessThanNine if lessThanNine < 9 =>
-          if (lessThanNine < five) result + calculate((five - lessThanNine), fiveR, false)
-          else calculate((lessThanNine % five), fiveR + result, true)
+          val lastRoman = calculations2(convertToRoman _, result + "IV", one)
+          calculations(lessThanNine, five, result + fiveR, lastRoman)
+
         case lessThanThirtyNine if lessThanThirtyNine < 40 =>
-          if (lessThanThirtyNine < ten) result + calculate((ten - lessThanThirtyNine), tenR, false)
-          else calculate((lessThanThirtyNine % ten), (tenR * (lessThanThirtyNine / ten)) + result, true)
+          val lastRoman = calculations2(convertToRoman _, result + "IX", one)
+          calculations(arabic, ten, result + (tenR * (arabic / ten)), lastRoman)
+
         case lessThanNinety if lessThanNinety < 90 =>
-          if (lessThanNinety < fifty) result + calculate((fifty - lessThanNinety), fiftyR, false)
-          else calculate((lessThanNinety % fifty), (fiftyR * (lessThanNinety / fifty)) + result , true)
-        case _ => "roman"
+          val lastRoman = calculations2(convertToRoman _, result + "XL", ten)
+          calculations(arabic, fifty, result + (fiftyR * (arabic / fifty)), lastRoman)
+
+        case lessThanFourHundred if lessThanFourHundred < 400 =>
+          val lastRoman = calculations2(convertToRoman _, result + "XC", ten)
+          calculations(arabic, hundred, result + (hundredR * (arabic / hundred)), lastRoman)
+
+        case lessThanThousand if lessThanThousand < 1000 =>
+          if (lessThanThousand < fiveHundred) "CD" else fiveHundredR
+
+        case _ => "yet to be converted"
       }
     }
 
-    val result = calculate(input)
-    println("\n" + input + "  " + result)
-    result
+    convertToRoman(arabic)
   }
 
-  def romanToArabic(roman: String) = {
-    println("converting Roman to Arabic")
+
+  def romanToArabic(roman: String): Int = {
     0
   }
 
