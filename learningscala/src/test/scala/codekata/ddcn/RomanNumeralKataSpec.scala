@@ -14,6 +14,7 @@ class RomanNumeralKataSpec extends FlatSpec with Matchers {
 	it should "convert random arabic numbers to roman numerals" in {
     arabicToRoman(14) should be("XIV")
 		arabicToRoman(69) should be("LXIX")
+		arabicToRoman(388) should be("CCCLXXXVIII")
 		arabicToRoman(399) should be("CCCXCIX")
   }
 
