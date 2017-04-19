@@ -25,4 +25,8 @@ class BowlingGameKataSpec extends FlatSpec with Matchers {
     calculateScore(List(1,4,4,5,6,4,5,4)) shouldBe 38
   }
 
+  it should "add scores when fifth frame is strike" in {
+    calculateScore(List(1,4,4,5,6,4,5,4,10,1,1)) shouldBe 52
+  }
+
 }
