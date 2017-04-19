@@ -8,7 +8,15 @@ object BowlingGameKata {
 
   def calculateScore(gameStats: List[(Int, Int)]): Int = {
 
-    12
+    @tailrec
+    def scoreMe(gameStats: List[(Int, Int)], accumulativeTotal: Int): Int = {
+      gameStats match {
+        case Nil => accumulativeTotal
+        case (head :: tail) => scoreMe(tail, accumulativeTotal + addFrame(head))
+      }
+    }
+
+    scoreMe(gameStats, 0)
   }
 
 }
