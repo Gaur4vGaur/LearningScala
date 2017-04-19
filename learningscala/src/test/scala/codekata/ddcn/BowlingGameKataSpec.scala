@@ -14,5 +14,8 @@ class BowlingGameKataSpec extends FlatSpec with Matchers {
     calculateScore(gameOne) shouldBe 12
   }
 
-
+  it should "return the game score when given two frames " in {
+    val gameOne = List((1, 2), (8, 1))
+    calculateScore(gameOne) shouldBe 12
+  }
 }
