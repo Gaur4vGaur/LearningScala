@@ -8,15 +8,17 @@ object BowlingGameKata {
     //scores.reduceLeft(_ + _)
 
     @tailrec
-    def accumulate(scoresList: List[Int], accumulator: Int): Int = {
+    def accumulate(scoresList: List[Int], isSpare:Boolean, accumulator: Int): Int = {
       scoresList match {
         case Nil => accumulator
         case bowl :: Nil => bowl + accumulator
-        case bowl :: secondBowl :: tail => println(tail); accumulate(tail, (accumulator + bowl + secondBowl))
+        case bowl :: secondBowl :: tail =>
+          val sum = accumulator + (if(isSpare) bowl * 2 else bowl) + secondBowl
+          accumulate(tail, (bowl+secondBowl) == 10, sum)
       }
     }
 
-    accumulate(scores, 0)
+    accumulate(scores, false, 0)
   }
 
 }
