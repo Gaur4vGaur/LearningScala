@@ -9,4 +9,8 @@ class BowlingGameKataSpec extends FlatSpec with Matchers {
     calculateScore(Array(1,4)) shouldBe 5
   }
 
+  it should "add scores of 3 balls" in {
+    calculateScore(Array(1,4,4)) shouldBe 9
+  }
+
 }
