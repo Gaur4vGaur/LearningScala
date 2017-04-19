@@ -33,4 +33,7 @@ class BowlingGameKataSpec extends FlatSpec with Matchers {
     calculateScore(List(1,4,4,5,6,4,5,5,10,0,1)) shouldBe 61
   }
 
+  it should "add scores for full game" in {
+    calculateScore(List(1,4,4,5,6,4,5,5,10,0,1,7,3,6,4,10,2,8,6)) shouldBe 133
+  }
 }
