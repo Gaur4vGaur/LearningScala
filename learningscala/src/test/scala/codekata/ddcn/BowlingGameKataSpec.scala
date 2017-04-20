@@ -44,4 +44,8 @@ class BowlingGameKataSpec extends FlatSpec with Matchers {
   it should "add scores for all strikes but last frame" in {
     calculateScore(List(10,10,10,10,10,10,10,10,10,1,1)) shouldBe 245
   }
+
+  it should "add scores to count 0,10 as a spare" in {
+    calculateScore(List(0,10,1,1)) shouldBe 13
+  }
 }
