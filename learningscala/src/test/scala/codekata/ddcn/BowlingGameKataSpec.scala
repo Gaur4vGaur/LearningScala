@@ -29,7 +29,7 @@ class BowlingGameKataSpec extends FlatSpec with Matchers {
     calculateScore(List(1,4,4,5,6,4,5,4,10,1,1)) shouldBe 52
   }
 
-  it should "add scores including 2 strikes and spares" in {
+  it should "add scores including 2 spares and a strike" in {
     calculateScore(List(1,4,4,5,6,4,5,5,10,0,1)) shouldBe 61
   }
 
