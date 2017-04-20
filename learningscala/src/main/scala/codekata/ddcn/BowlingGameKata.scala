@@ -9,7 +9,7 @@ object BowlingGameKata {
 
     @tailrec
     def accumulate(scoresList: List[Int], isSpare:Boolean = false,
-                   isStrike: Boolean = false, accumulator: Int = 0): Int = {
+                   isStrike: Boolean = false, wasContinuous: Boolean = false, accumulator: Int = 0): Int = {
 
       val calcBowl = (bowl: Int) => if(isSpare || isStrike) bowl * 2 else bowl
       val calcSecondBowl = (secondBowl: Int) => if(isStrike) secondBowl * 2 else secondBowl
@@ -19,9 +19,9 @@ object BowlingGameKata {
 
         case bowl :: Nil => bowl + accumulator
 
-        case bowl :: tail if(bowl == 10) =>
-          val sum = accumulator + calcBowl(bowl)
-          accumulate(tail, isStrike = true, accumulator = sum)
+        case bowl :: secondBowl :: tail if(bowl == 10) =>
+          val sum = accumulator + calcBowl(bowl) + (if(wasContinuous) secondBowl else 0)
+          accumulate(secondBowl :: tail, isStrike = true, wasContinuous = (secondBowl == 10), accumulator = sum)
 
         case bowl :: secondBowl :: tail =>
           val sum = accumulator + calcBowl(bowl) + calcSecondBowl(secondBowl)
@@ -29,7 +29,7 @@ object BowlingGameKata {
       }
     }
 
-    accumulate(scores, false, false, 0)
+    accumulate(scores, false, false, false, 0)
   }
 
 }
